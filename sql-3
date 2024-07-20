@@ -1,0 +1,49 @@
+-- Create the database
+CREATE DATABASE university;
+
+-- Use the database
+USE university;
+
+-- Create the tables
+CREATE TABLE students (
+  student_id INT PRIMARY KEY,
+  name VARCHAR(255),
+  major VARCHAR(255),
+  gpa DECIMAL(3, 2)
+);
+
+CREATE TABLE courses (
+  course_id INT PRIMARY KEY,
+  name VARCHAR(255),
+  credits INT,
+  department VARCHAR(255)
+);
+
+CREATE TABLE enrollments (
+  enrollment_id INT PRIMARY KEY,
+  student_id INT,
+  course_id INT,
+  grade VARCHAR(2),
+  FOREIGN KEY (student_id) REFERENCES students(student_id),
+  FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+
+-- Insert some sample data
+INSERT INTO students (student_id, name, major, gpa)
+VALUES
+  (1, 'John Doe', 'Computer Science', 3.5),
+  (2, 'Jane Smith', 'Biology', 3.2),
+  (3, 'Bob Johnson', 'Mathematics', 3.8);
+
+INSERT INTO courses (course_id, name, credits, department)
+VALUES
+  (1, 'Introduction to Computer Science', 4, 'Computer Science'),
+  (2, 'Biology 101', 3, 'Biology'),
+  (3, 'Calculus I', 4, 'Mathematics');
+
+INSERT INTO enrollments (enrollment_id, student_id, course_id, grade)
+VALUES
+  (1, 1, 1, 'A'),
+  (2, 1, 2, 'B'),
+  (3, 2, 1, 'C'),
+  (4, 3, 3, 'A');
